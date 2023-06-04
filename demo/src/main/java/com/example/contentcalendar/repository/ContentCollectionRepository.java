@@ -1,25 +1,45 @@
 package com.example.contentcalendar.repository;
 
 import com.example.contentcalendar.model.Content;
+import com.example.contentcalendar.model.Status;
+import com.example.contentcalendar.model.Type;
+import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class ContentCollectionRepository {
-    private final List<Content> content = new ArrayList<>();
+    private final List<Content> contentList = new ArrayList<>();
 
     public ContentCollectionRepository() {
     }
 
-    public List<Content> findAll(){
-        return content;
+    public List<Content> findAll() {
+        return contentList;
     }
 
-    public Optional<Content> findById(Integer id){
-        return content.stream().filter(c -> c.id().equals(id)).findFirst();
+    public Optional<Content> findById(Integer id) {
+        return contentList.stream().filter(c -> c.id().equals(id)).findFirst();
     }
 
+
+    public void save(Content content) {
+        contentList.add(content);
+    }
+    @PostConstruct
+    public void init() {
+        Content content = new Content(1,
+                "test01",
+                "testing",
+                Status.IN_PROGRESS,
+                Type.ARTICLE,
+                LocalDateTime.now(),
+                null, "");
+
+        contentList.add(content);
+    }
 }
