@@ -1,11 +1,13 @@
 package com.example.contentcalendar.repository;
 
 import com.example.contentcalendar.model.Content;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class ContentCollectionRepository {
     private final List<Content> content = new ArrayList<>();
 
